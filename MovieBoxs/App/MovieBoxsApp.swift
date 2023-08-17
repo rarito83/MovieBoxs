@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MovieBoxsApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+
+  let inject = Injection()
+  
+  var body: some Scene {
+    WindowGroup {
+      MainTabView()
     }
+  }
 }
