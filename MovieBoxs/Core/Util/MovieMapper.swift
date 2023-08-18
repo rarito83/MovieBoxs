@@ -85,7 +85,7 @@ final class MovieMapper {
   }
 
   static func mapGenreResponseToDomains(input response: DetailMovieResponse) -> [GenreModel] {
-      return response.genres!.map { GenreModel(id: $0.id ?? 0, name: $0.name ?? "") }
+      return response.genres!.map { GenreModel(id: $0.id, name: $0.name) }
   }
   
   static func mapCompaniesResponseToDomains(input response: DetailMovieResponse) -> [ProductionCompaniesModel] {

@@ -27,7 +27,6 @@ final class LocaleDataSource: NSObject {
   static let sharedInstance: (Realm?) -> LocaleDataSource = { realmDatabase in
     return LocaleDataSource(realm: realmDatabase)
   }
-  
 }
 
 extension LocaleDataSource: LocaleDataSourceProtocol {
@@ -52,13 +51,12 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
   
   func isFavoriteMovie(id: Int) -> AnyPublisher<Bool, Error> {
       return Future<Bool, Error> { completion in
-          guard let realmDb = self.realm else {
+          guard let _ = self.realm else {
               completion(.failure(DatabaseError.invalidInstance))
               return
           }
 
           let result = self.getObject(id: id)
-          print(result)
           completion(.success(result != nil))
       }.eraseToAnyPublisher()
   }

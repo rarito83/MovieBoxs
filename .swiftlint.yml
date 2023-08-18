@@ -1,2 +1,6 @@
 disabled_rules: # rule identifiers to exclude from running
 - trailing_whitespace
+- force_cast
+- switch_case_alignment
+- redundant_string_enum_value
+- closure_parameter_position

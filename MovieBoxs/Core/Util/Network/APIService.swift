@@ -9,7 +9,19 @@ import Foundation
 
 struct APIService {
   static let baseUrl = "https://api.themoviedb.org/3/"
-  static let apiKey = "a7a9271a64bad860e31a939fabd5b93f"
+  public static var apiKey: String {
+    get {
+      guard let filePath = Bundle.main.path(forResource: "TMDB-Info", ofType: "plist") else {
+        fatalError("Couldn't find file 'TMDB-Info.plist'.")
+      }
+
+      let plist = NSDictionary(contentsOfFile: filePath)
+      guard let value = plist?.object(forKey: "API_Key") as? String else {
+        fatalError("Couldn't find key 'API_Key' in 'TMDB-Info.plist'.")
+      }
+      return value
+    }
+  }
 }
 
 struct IMAGE {
@@ -66,5 +78,4 @@ enum DatabaseError: LocalizedError {
       case .requestFailed: return "Your request failed."
     }
   }
-  
 }

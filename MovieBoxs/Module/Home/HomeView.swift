@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct HomeView: View {
   
   @ObservedObject var presenter: HomePresenter
+  @State private var select = ""
 
   var body: some View {
     
@@ -22,9 +23,27 @@ struct HomeView: View {
           ScrollView(.horizontal, showsIndicators: false) {
               HStack {
                 ForEach(presenter.genreMovies, id: \.id) { genre in
-                  GenreView(genre: genre).onTapGesture {
-                    print("Genre ID: \(genre.id)")
+                  Button {
+                    select = genre.name
                     self.presenter.fetchMovies(id: genre.id, page: presenter.page)
+                  } label: {
+                    Text("\(genre.name)")
+                      .foregroundColor(.black)
+                      .overlay(
+                          RoundedRectangle(cornerRadius: 10)
+                              .stroke(Color.black, lineWidth: 2)
+                              .frame(width: 137, height: 33)
+                      )
+                      .padding()
+                  }
+                  .frame(width: 140, height: 36)
+                  .cornerRadius(10)
+                  .background(select == genre.name ? Color.gray : Color.white)
+                  .cornerRadius(10)
+                  .onAppear {
+                    if let first = presenter.genreMovies.first?.name {
+                      select = first
+                    }
                   }
                 }
               }

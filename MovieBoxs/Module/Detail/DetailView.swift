@@ -19,7 +19,7 @@ struct DetailView: View {
 
   var body: some View {
     ZStack {
-      if presenter.detailMovie == nil {
+      if presenter.detailMovie.title.isEmpty {
         VStack {
           ProgressView().padding()
           Text("Loading...")
@@ -27,7 +27,7 @@ struct DetailView: View {
       } else {
         ScrollView(.vertical, showsIndicators: true) {
           let detail = presenter.detailMovie
-          let key = presenter.video?.key
+          let _ = presenter.video?.key
           VStack {
             WebImage(url: URL(string: detail.poster))
               .aspectRatio(contentMode: .fill)
