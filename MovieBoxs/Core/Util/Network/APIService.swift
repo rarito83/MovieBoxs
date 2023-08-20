@@ -9,6 +9,7 @@ import Foundation
 
 struct APIService {
   static let baseUrl = "https://api.themoviedb.org/3/"
+  static let youtubeUrl = "https://www.youtube.com/watch"
   public static var apiKey: String {
     get {
       guard let filePath = Bundle.main.path(forResource: "TMDB-Info", ofType: "plist") else {
@@ -44,7 +45,7 @@ enum Endpoints {
         case .genre: return "\(APIService.baseUrl)genre/movie/list"
         case .popular: return "\(APIService.baseUrl)movie/popular"
         case .detail: return "\(APIService.baseUrl)movie"
-        case .video: return "\(APIService.baseUrl)video"
+        case .video: return "\(APIService.baseUrl)movie"
       }
     }
   }
@@ -52,6 +53,7 @@ enum Endpoints {
 
 func genreMovie(idGenre: Int) -> String { return "\(idGenre)"}
 func detailMovie(idMovie: Int) -> String { return "/\(idMovie)"}
+func movieTrailer(idMovie: Int) -> String { return "/\(idMovie)/videos"}
 
 enum URLError: LocalizedError {
   

@@ -30,7 +30,11 @@ struct DetailMovieModel: Identifiable {
   var backdrop: String { IMAGE.imageUrl + backdropPath }
   
   var genre: String {
-    return genres.map { $0.name }.joined(separator: ",")
+    return genres.map { $0.name }.joined(separator: ", ")
+  }
+  
+  var prodCompany: String {
+    return productionCompanies.map { $0.name }.joined(separator: ", ")
   }
   
   var releaseDateFormatted: String {

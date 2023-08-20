@@ -17,27 +17,26 @@ struct FavoriteView: View {
       if presenter.loadingState {
           VStack {
             ProgressView().padding()
-              Text("Loading...")
+            Text("Loading...")
           }
       } else if !presenter.movies.isEmpty {
-          
-        ScrollView(.vertical, showsIndicators: true) {
-            VStack {
-              ForEach(presenter.movies, id: \.id) { movie in
-                self.presenter.linkBuilder(for: movie) {
-                  MovieView(movie: movie)
+          ScrollView(.vertical, showsIndicators: true) {
+              VStack {
+                ForEach(presenter.movies, id: \.id) { movie in
+                  self.presenter.linkBuilder(for: movie) {
+                    MovieView(movie: movie)
+                  }
                 }
-              }
-            }.padding(.top, 16)
-        }
+              }.padding(.top, 16)
+          }
       } else if presenter.movies.isEmpty {
           EmptyView(image: "film.fill", title: "Anda belum menambahkan movie favorit")
       } else {
-        Text(presenter.errorMessage)
+          Text(presenter.errorMessage)
       }
     }.onAppear {
-      presenter.fetchMovies()
-      print(presenter.movies)
+        presenter.fetchMovies()
+        print(presenter.movies)
     }
   }
 }

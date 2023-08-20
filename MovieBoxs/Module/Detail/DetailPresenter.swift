@@ -18,7 +18,7 @@ class DetailPresenter: ObservableObject {
     
     @Published var movie: MovieModel
     @Published var detailMovie: DetailMovieModel = DetailMovieModel.default
-//    @Published var videoMovie: String = ""
+    @Published var videoMovie: String?
     @Published var video: VideoModel?
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
@@ -52,24 +52,27 @@ class DetailPresenter: ObservableObject {
               }
           } receiveValue: { detailMov in
               self.detailMovie = detailMov
+              if (self.detailMovie.id == 0) { self.fetchMovieTrailer(id: self.detailMovie.id) }
           }.store(in: &cancellables)
   }
   
-  func fetchMovieTrailer() {
+  func fetchMovieTrailer(id: Int) {
     loadingState = true
-    detailUseCase.fetchVideo(idMovie: movie.id)
-          .receive(on: RunLoop.main)
-          .sink { completion in
-              switch completion {
-              case let .failure(error):
-                  self.errorMessage = error.localizedDescription
-                  self.loadingState = false
-              case .finished:
-                  self.loadingState = false
-              }
-          } receiveValue: { video in
-              self.video = video
-          }.store(in: &cancellables)
+    print("fetch movie trailer: \(detailMovie.id)")
+    detailUseCase.fetchVideo(idMovie: detailMovie.id)
+        .receive(on: RunLoop.main)
+        .sink { completion in
+            switch completion {
+            case let .failure(error):
+                self.errorMessage = error.localizedDescription
+                self.loadingState = false
+            case .finished:
+                self.loadingState = false
+            }
+        } receiveValue: { video in
+          self.videoMovie = "https://www.youtube.com/watch?v=\(video.key)"
+          print("key movie trailer:", self.videoMovie as Any)
+        }.store(in: &cancellables)
   }
   
   func checkFavorite() {

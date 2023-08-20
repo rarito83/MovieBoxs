@@ -12,10 +12,6 @@ import AVKit
 struct DetailView: View {
   
   @ObservedObject var presenter: DetailPresenter
-  
-  init(presenter: DetailPresenter) {
-    self.presenter = presenter
-  }
 
   var body: some View {
     ZStack {
@@ -27,7 +23,7 @@ struct DetailView: View {
       } else {
         ScrollView(.vertical, showsIndicators: true) {
           let detail = presenter.detailMovie
-          let _ = presenter.video?.key
+//          linkVideo = presenter.videoMovie
           VStack {
             WebImage(url: URL(string: detail.poster))
               .aspectRatio(contentMode: .fill)
@@ -90,53 +86,60 @@ struct DetailView: View {
             VStack(alignment: .leading) {
               HStack(alignment: .top) {
                 VStack(alignment: .leading) {
-                  Text("Rating")
+                  Text("Genre")
                       .fontWeight(.bold)
                   
-                  Text(String(detail.voteAverage))
+                  Text(detail.genre)
                   
-                  Text("Genre")
+                  Text("Production")
                       .fontWeight(.bold)
                       .padding(.top)
                   
-                  Text(detail.genre)
+                  Text(detail.prodCompany)
                   
                   Text("Trailer")
                       .fontWeight(.bold)
                       .padding(.top)
                 
-                  TrailerView(key: presenter.video?.key ?? "6JnN1DmbqoU")
-                    .padding(.top, 8)
+                  TrailerView(presenter: presenter, link: presenter.videoMovie ?? "")
+                      .frame(width: UIScreen.main.bounds.width - 24, height: 200, alignment: .center)
+                      .cornerRadius(10)
+                      
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
               }
               .padding()
             }
+            .onAppear {
+                presenter.fetchMovieTrailer(id: presenter.detailMovie.id)
+            }
           }
         }.padding(.bottom, 20)
       }
     }.onAppear {
-        print("Detail value: \(presenter.movie.id)")
         presenter.fetchDetailMovie()
-        presenter.fetchMovieTrailer()
         presenter.checkFavorite()
     }
   }
 }
 
 struct TrailerView: View {
-  var key: String
+  @ObservedObject var presenter: DetailPresenter
+  @State var link: String = ""
   
+  init(presenter: DetailPresenter, link: String) {
+    self.presenter = presenter
+    self.link = link
+    print("link trailer", link)
+  }
+
   var body: some View {
-    VStack {
-      VideoPlayer(player: AVPlayer(
-        url: URL(
-//          string: "https://www.youtube.com/watch?v=\(key)")!
-          string: "https://media.w3.org/2010/05/sintel/trailer.mp4")!
-        )
-      )
-      .frame(width: UIScreen.main.bounds.width - 40, height: 200, alignment: .center)
-      .cornerRadius(10)
-    }
+      VStack {
+          VideoPlayer(player: AVPlayer(url: URL(
+//              string: link)!
+              string: "https://media.w3.org/2010/05/sintel/trailer.mp4")!
+            )
+          )
+      }
   }
 }

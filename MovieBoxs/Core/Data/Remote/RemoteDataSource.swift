@@ -105,7 +105,7 @@ extension RemoteDataSource: RemoteDataSourceProtocol {
     ]
     
     return Future<Video, Error> { completion in
-      if let urlComponent = URLComponents(string: Endpoints.Gets.video.url+detailMovie(idMovie: idMovie)) {
+      if let urlComponent = URLComponents(string: Endpoints.Gets.video.url+movieTrailer(idMovie: idMovie)) {
         if let url = URL(string: "\(urlComponent)") {
           print("URL Video: \(urlComponent)")
           AF.request(url, method: .get, parameters: params)
