@@ -23,7 +23,6 @@ struct DetailView: View {
       } else {
         ScrollView(.vertical, showsIndicators: true) {
           let detail = presenter.detailMovie
-//          linkVideo = presenter.videoMovie
           VStack {
             WebImage(url: URL(string: detail.poster))
               .aspectRatio(contentMode: .fill)
@@ -57,19 +56,27 @@ struct DetailView: View {
               .padding(.horizontal)
             }
             
-            let isFavorite = presenter.isFavorite
-            Button(isFavorite ? "Remove Favorite" : "Add Favorite") {
-                if isFavorite {
-                    presenter.removeFavorite()
-                } else {
-                    presenter.addFavorite()
+            if presenter.isFavorite {
+                IsFavoriteView(
+                  image: "heart.fill",
+                  title: "Remove from favorite",
+                  isFavorite: presenter.isFavorite
+                )
+                .foregroundColor(.green)
+                .onTapGesture {
+                  presenter.removeFavorite()
+                }
+            } else {
+                IsFavoriteView(
+                  image: "heart",
+                  title: "Add to favorite",
+                  isFavorite: presenter.isFavorite
+                )
+                .foregroundColor(.red)
+                .onTapGesture {
+                  presenter.addFavorite()
                 }
             }
-            .padding()
-            .foregroundColor(.white)
-            .background(isFavorite ? Color.red : Color.green)
-            .clipShape(Capsule())
-            .padding(10)
             
             Spacer()
 
@@ -136,7 +143,6 @@ struct TrailerView: View {
   var body: some View {
       VStack {
           VideoPlayer(player: AVPlayer(url: URL(
-//              string: link)!
               string: "https://media.w3.org/2010/05/sintel/trailer.mp4")!
             )
           )

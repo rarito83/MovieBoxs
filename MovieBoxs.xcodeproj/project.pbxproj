@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA4DFD4D2A95A2FE005363CB /* IsFavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DFD4C2A95A2FE005363CB /* IsFavoriteView.swift */; };
 		FAF0AF582A8B621500F12357 /* MovieBoxsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF0AF572A8B621500F12357 /* MovieBoxsApp.swift */; };
 		FAF0AF5A2A8B621500F12357 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF0AF592A8B621500F12357 /* MainTabView.swift */; };
 		FAF0AF5C2A8B621600F12357 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF0AF5B2A8B621600F12357 /* Assets.xcassets */; };
@@ -55,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA4DFD4C2A95A2FE005363CB /* IsFavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsFavoriteView.swift; sourceTree = "<group>"; };
 		FAF0AF542A8B621500F12357 /* MovieBoxs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieBoxs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF0AF572A8B621500F12357 /* MovieBoxsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBoxsApp.swift; sourceTree = "<group>"; };
 		FAF0AF592A8B621500F12357 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				FAF0AFB12A8BA7A900F12357 /* RatingView.swift */,
 				FAF0AFB32A8BA85600F12357 /* MovieView.swift */,
 				FAF0AFD82A8D939C00F12357 /* EmptyView.swift */,
+				FA4DFD4C2A95A2FE005363CB /* IsFavoriteView.swift */,
 			);
 			path = BaseView;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				FAF0AF982A8B6D0600F12357 /* LocaleDataSource.swift in Sources */,
 				FAF0AFD12A8CDFB700F12357 /* FavoriteRouter.swift in Sources */,
 				FAF0AF582A8B621500F12357 /* MovieBoxsApp.swift in Sources */,
+				FA4DFD4D2A95A2FE005363CB /* IsFavoriteView.swift in Sources */,
 				FAF0AFCB2A8CBDFF00F12357 /* RemoveFavoriteInteractor.swift in Sources */,
 				FAF0AFD92A8D939D00F12357 /* EmptyView.swift in Sources */,
 				FAF0AFD72A8D3CAB00F12357 /* VideoResponse.swift in Sources */,
