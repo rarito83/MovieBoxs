@@ -21,7 +21,7 @@ struct IsFavoriteView: View {
         HStack {
           Image(systemName: image)
             .font(.system(size: 20))
-            .foregroundColor(isFavorite ? Color.green : Color.red)
+            .foregroundColor(isFavorite ? Color.red : Color.green)
           
           Text(title)
             .foregroundColor(.black)

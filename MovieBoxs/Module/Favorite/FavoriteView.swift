@@ -14,29 +14,31 @@ struct FavoriteView: View {
   
   var body: some View {
     NavigationView {
-      if presenter.loadingState {
-          VStack {
-            ProgressView().padding()
-            Text("Loading...")
-          }
-      } else if !presenter.movies.isEmpty {
-          ScrollView(.vertical, showsIndicators: true) {
-              VStack {
-                ForEach(presenter.movies, id: \.id) { movie in
-                  self.presenter.linkBuilder(for: movie) {
-                    MovieView(movie: movie)
+      VStack {
+        if presenter.loadingState {
+            VStack {
+              ProgressView().padding()
+              Text("Loading...")
+            }
+        } else if !presenter.movies.isEmpty {
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack {
+                  ForEach(presenter.movies, id: \.id) { movie in
+                    self.presenter.linkBuilder(for: movie) {
+                      MovieView(movie: movie)
+                    }
                   }
-                }
-              }.padding(.top, 16)
-          }
-      } else if presenter.movies.isEmpty {
-          EmptyView(image: "film.fill", title: "Anda belum menambahkan movie favorit")
-      } else {
-          Text(presenter.errorMessage)
+                }.padding(.top, 16)
+            }
+        } else if presenter.movies.isEmpty {
+            EmptyView(image: "film.fill", title: "Anda belum menambahkan movie favorit")
+        } else {
+            Text(presenter.errorMessage)
+        }
+      }.onAppear {
+          self.presenter.fetchMovies()
       }
-    }.onAppear {
-        presenter.fetchMovies()
-        print(presenter.movies)
+      .navigationTitle("Favorite Movies")
     }
   }
 }

@@ -62,7 +62,7 @@ struct DetailView: View {
                   title: "Remove from favorite",
                   isFavorite: presenter.isFavorite
                 )
-                .foregroundColor(.green)
+                .foregroundColor(.red)
                 .onTapGesture {
                   presenter.removeFavorite()
                 }
@@ -72,7 +72,7 @@ struct DetailView: View {
                   title: "Add to favorite",
                   isFavorite: presenter.isFavorite
                 )
-                .foregroundColor(.red)
+                .foregroundColor(.green)
                 .onTapGesture {
                   presenter.addFavorite()
                 }

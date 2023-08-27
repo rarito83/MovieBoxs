@@ -119,9 +119,9 @@
 		FAF0AF4B2A8B621400F12357 = {
 			isa = PBXGroup;
 			children = (
+				FAF0AF562A8B621500F12357 /* MovieBoxs */,
 				FAF0B0732A8F901300F12357 /* TMDB-Info.plist */,
 				FAF0AF792A8B656900F12357 /* .swiftlint.yml */,
-				FAF0AF562A8B621500F12357 /* MovieBoxs */,
 				FAF0AF552A8B621500F12357 /* Products */,
 			);
 			sourceTree = "<group>";
