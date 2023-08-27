@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
   var body: some View {
+    NavigationView {
       VStack(spacing: 20) {
           Image("rarito")
               .resizable()
@@ -19,7 +20,8 @@ struct ProfileView: View {
               .foregroundColor(.indigo)
           Text("iOS Developer")
               .bold()
-      }
+      }.navigationTitle("Profile")
+    }
   }
 }
 
