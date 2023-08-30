@@ -12,9 +12,7 @@ class DetailPresenter: ObservableObject {
   
     private var cancellables: Set<AnyCancellable> = []
     private let detailUseCase: DetailUseCase
-    private let addFavoriteUseCase: AddFavoriteUseCase
-    private let removeFavoriteUseCase: RemoveFavoriteUseCase
-    private let getFavoriteUseCase: GetFavoriteUseCase
+    private let favoriteUseCase: FavoriteUseCase
     
     @Published var movie: MovieModel
     @Published var detailMovie: DetailMovieModel = DetailMovieModel.default
@@ -27,15 +25,11 @@ class DetailPresenter: ObservableObject {
     init(
       movie: MovieModel,
       detailUseCase: DetailUseCase,
-      addFavoriteUseCase: AddFavoriteUseCase,
-      removeFavoriteUseCase: RemoveFavoriteUseCase,
-      getFavoriteUseCase: GetFavoriteUseCase
+      favoriteUseCase: FavoriteUseCase
     ) {
         self.movie = movie
         self.detailUseCase = detailUseCase
-        self.addFavoriteUseCase = addFavoriteUseCase
-        self.removeFavoriteUseCase = removeFavoriteUseCase
-        self.getFavoriteUseCase = getFavoriteUseCase
+        self.favoriteUseCase = favoriteUseCase
     }
 
   func fetchDetailMovie() {
@@ -76,7 +70,7 @@ class DetailPresenter: ObservableObject {
   }
   
   func checkFavorite() {
-      getFavoriteUseCase.statusFavorite(id: movie.id)
+      favoriteUseCase.statusFavorite(id: movie.id)
           .receive(on: RunLoop.main)
           .sink { completion in
               switch completion {
@@ -93,7 +87,7 @@ class DetailPresenter: ObservableObject {
   
   func addFavorite() {
       self.isFavorite = true
-      addFavoriteUseCase.action(movie: movie)
+      favoriteUseCase.actionAdd(movie: movie)
           .receive(on: RunLoop.main)
           .sink { completion in
               switch completion {
@@ -110,7 +104,7 @@ class DetailPresenter: ObservableObject {
   }
   
   func removeFavorite() {
-      removeFavoriteUseCase.action(id: movie.id)
+      favoriteUseCase.actionRemove(id: movie.id)
           .receive(on: RunLoop.main)
           .sink { completion in
               switch completion {

@@ -22,7 +22,7 @@ struct MainTabView: View {
       }
       
       FavoriteView(presenter: FavoritePresenter(
-        getFavoriteUseCase: injection.provideGetFavorites())
+        favoriteUseCase: injection.provideFavorites())
       ).tabItem {
           Image(systemName: "heart.circle")
           Text("Favorite")

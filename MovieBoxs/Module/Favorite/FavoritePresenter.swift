@@ -13,19 +13,19 @@ class FavoritePresenter: ObservableObject {
   
   private var cancellables: Set<AnyCancellable> = []
   private var router = FavoriteRouter()
-  private let getFavoriteUseCase: GetFavoriteUseCase
+  private let favoriteUseCase: FavoriteUseCase
   
   @Published var movies: [MovieModel] = []
   @Published var errorMessage: String = ""
   @Published var loadingState: Bool = false
   
-  init(getFavoriteUseCase: GetFavoriteUseCase) {
-      self.getFavoriteUseCase = getFavoriteUseCase
+  init(favoriteUseCase: FavoriteUseCase) {
+      self.favoriteUseCase = favoriteUseCase
   }
   
   func fetchMovies() {
       loadingState = true
-      getFavoriteUseCase.action()
+      favoriteUseCase.action()
           .receive(on: RunLoop.main)
           .sink { completion in
               switch completion {

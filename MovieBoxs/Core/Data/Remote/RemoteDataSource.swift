@@ -113,8 +113,9 @@ extension RemoteDataSource: RemoteDataSourceProtocol {
             .responseDecodable(of: VideoResponse.self) { response in
               switch response.result {
               case .success(let value):
-                  completion(.success(value.results.first!))
-                  print("Video: \(value.results.first!)")
+                  if (value.results.first?.key == "") { return } else {
+                    completion(.success(value.results.first!))
+                  }
               case .failure:
                 completion(.failure(URLError.invalidResponse))
               }

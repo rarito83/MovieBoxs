@@ -10,13 +10,11 @@ import SwiftUI
 class FavoriteRouter {
   
   func makeFavoriteView(for movie: MovieModel) -> some View {
-      let injection = Injection()
-      let detailUseCase = injection.provideDetail()
+      let detailUseCase = Injection.init().provideDetail()
+      let favoriteUseCase = Injection.init().provideFavorites()
       let presenter = DetailPresenter(movie: movie,
               detailUseCase: detailUseCase,
-              addFavoriteUseCase: injection.provideAddFavorite(),
-              removeFavoriteUseCase: injection.provideRemoveFavorite(),
-              getFavoriteUseCase: injection.provideGetFavorites())
+              favoriteUseCase: favoriteUseCase)
       return DetailView(presenter: presenter)
   }
 }
